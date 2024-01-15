@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+# nowe biblioteki co doinstalowałem
+
+npm install axios
+
 ## Available Scripts
 
 In the project directory, you can run:

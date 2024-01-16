@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function DataFetchingComponent() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
     fetchData();

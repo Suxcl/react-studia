@@ -45,38 +45,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Testing ground</p>
-        <div>
-            
-          <h1>{user.name}</h1>
-          <img
-            className="avatar"
-            src={user.imageUrl}
-            alt={'Photo of ' + user.name}
-            style={{
-              width: user.imageSize,
-              height: user.imageSize
-            }}
-          />
-        
-        </div>
-        <ul>{listItems}</ul>
-        <CustomButton />
-        <CustomButton />
-        <CustomButton />
-        {/* <AboutPage("tesing")/> */}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
       </header>
+      <body>
+        
+      </body>
     </div>
   );
 }

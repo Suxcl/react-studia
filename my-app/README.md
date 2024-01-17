@@ -6,6 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # nowe biblioteki co doinstalowałem
 
 npm install axios
+npm install @reduxjs/toolkit react-redux
+npm install @mui/material @emotion/react @emotion/styled
+npm install react-router-dom
 
 ## Available Scripts
 

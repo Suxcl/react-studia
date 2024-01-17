@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 function DataFetchingComponent() {
   const [data, setData] = useState<any[]>([]);
 
@@ -10,7 +11,7 @@ function DataFetchingComponent() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/posts');
+      const response = await axios.get('http://http://51.83.130.126:3000/posts');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);

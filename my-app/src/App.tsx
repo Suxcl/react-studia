@@ -3,6 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
+// ta stronka jest do wywalanie
+// ta stronka jest do wywalanie// ta stronka jest do wywalanie
+// ta stronka jest do wywalanie
+// ta stronka jest do wywalanie
+// ta stronka jest do wywalanie
+// ta stronka jest do wywalanie
+// ta stronka jest do wywalanie
 
 function CustomButton(){
   const [count, setCount] = useState(0);

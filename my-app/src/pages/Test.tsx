@@ -4,6 +4,7 @@ import { addUser, removeUser, updateUser } from "../reducers/usersReducer";
 
 
 import { User } from "../types/user";
+import { Link } from "react-router-dom";
 
 
 function Test(){
@@ -16,6 +17,8 @@ function Test(){
 
     return (
         <>
+            <h1>Testing Grounds</h1>
+            <hr></hr>
             <h1>Pizza</h1>
             {pizza.toppings.map((topping: string) => 
                 <li key={topping}>{topping}</li>
@@ -23,6 +26,9 @@ function Test(){
             <button onClick={() => dispatch(addTopping('pepperoni'))}>Add Pepperoni</button>
 
             <h1>Users</h1>
+            
+            <Link to="/Login">Login</Link>
+            <Link to="/Register">Register</Link>
             {users.map((user: User) =>
                 <>
                     <li>{user.id}|{user.name}|{user.surname}|{user.email}|{user.username}|{user.password}|{user.friends}</li>

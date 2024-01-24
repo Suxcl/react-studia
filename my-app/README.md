@@ -9,6 +9,8 @@ npm install axios
 npm install @reduxjs/toolkit react-redux
 npm install @mui/material @emotion/react @emotion/styled
 npm install react-router-dom
+npm install --save react-toastify
+npm install uuid
 
 # docs for dialogs
 https://mui.com/material-ui/react-dialog/

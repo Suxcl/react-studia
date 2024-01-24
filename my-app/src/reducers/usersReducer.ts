@@ -1,48 +1,34 @@
-import { User } from './../types/user';
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import type { User } from './../types/user';
+
 import FormDialog from '../components/editUser';
-import { useId } from 'react';
-import { RootState } from '../store';
+import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
 
-type status = 'pending' | 'fulfilled' | 'rejected'
 
-// Define the type of the state
 interface UsersState {
-    status: status;
-    users: User[] // Replace 'any' with the actual type of users
+    users: User[] 
+    init_status: true|false,
   }
-  
-  const initialState: UsersState = {
-    status: 'pending',
-    users: [],
-  };
 
-export const getUsers = createAsyncThunk(
-    "users/getUsers",
-    async () => {
-        try{
-            const response = await fetch('http://51.83.130.126:3000/users');
-            const data = await response.json();
-            return data;
-        }catch(error){
-            console.log(error);
-        }
-    }
-)
+const initialState: UsersState = {
+    init_status: true,
+    users: [] 
+};
 
 
 export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        addUser(state, action) {
-            if (state.status === 'fulfilled'){
-                let newUser:User = action.payload
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                //newUser.id = useId()
-                newUser.name = action.payload.name
-                state.users.push(action.payload)
+        setUsers(state, action) {
+            if(state.init_status) {
+                state.users = action.payload
+                state.init_status = false
             }
+        },
+        addUser(state, action) {       
+            console.log("adding new user to redux")     
+            console.log(action.payload)
+            state.users.push(action.payload)
         },
         removeUser(state, action) {
             // state.users = state.users.filter(user => user.id !== action.payload)
@@ -54,25 +40,8 @@ export const userSlice = createSlice({
             state.users[index] = User
         }
     },
-    extraReducers: (builder) => {
-        builder.addCase(getUsers.pending, (state, action) => {
-            state.status = 'pending'
-        })
-        builder.addCase(getUsers.fulfilled, (state, action) => {
-
-            action.payload.forEach((element: any) => {
-                //console.log(JSON.parse(element.body))
-                let newUser = element.body
-                // console.log(newUser)
-                state.users.push(JSON.parse(newUser))
-            });
-            //state.users = action.payload;
-            state.status = 'fulfilled'
-        })
-    }
 })
 
-export const { addUser, removeUser, updateUser} = userSlice.actions
+export const { addUser, removeUser, updateUser, setUsers} = userSlice.actions
 export default userSlice.reducer
 
-export const selectUsers = (state:RootState) => state.user.users

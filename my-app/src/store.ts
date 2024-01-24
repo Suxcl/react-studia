@@ -8,10 +8,10 @@ import invitesReducer from "./reducers/invitesReducer";
 export const store = configureStore({
   reducer: {
     pizza: pizzaReducer,
-    user: usersReducer,
-    post: postsReducer,
-    comment: commentsReducer,
-    invite: invitesReducer
+    users: usersReducer,
+    posts: postsReducer,
+    comments: commentsReducer,
+    invites: invitesReducer
   },
 });
 

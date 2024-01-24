@@ -57,7 +57,7 @@ export const putUser = async(user:User) => {
     })
 }
 
-export const deleteUser = async(id:number) => {
+export const deleteUser = async(id:string) => {
     await axios.delete(`${URL}/${id}`).then(response => {
         console.log("delete user successfully")
         console.log(response.data)

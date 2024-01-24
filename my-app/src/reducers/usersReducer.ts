@@ -31,7 +31,7 @@ export const userSlice = createSlice({
             state.users.push(action.payload)
         },
         removeUser(state, action) {
-            // state.users = state.users.filter(user => user.id !== action.payload)
+            state.users = state.users.filter(user => user.id !== action.payload)
         },
         updateUser(state, action) {
             FormDialog()

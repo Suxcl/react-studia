@@ -13,6 +13,7 @@ import Blog from './pages/Blog';
 import Test from './pages/Test';
 import TestParams from './pages/TestParams';
 import Register from './pages/Register';
+import UserEdit from './pages/UserEdit';
 
 
 const root = ReactDOM.createRoot(
@@ -27,6 +28,7 @@ root.render(
           <Route path="Test" element={<Test />} />
           <Route path="Register" element={<Register />} />
           <Route path="TestParams/:id" element={<TestParams />} />
+          <Route path='UserEdit' element={<UserEdit/>}/>
         </Route>
       </Routes>  
     </Provider>

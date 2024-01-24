@@ -1,6 +1,6 @@
 import type { User } from './../types/user';
 
-import FormDialog from '../components/editUser';
+
 import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
 
 
@@ -34,7 +34,6 @@ export const userSlice = createSlice({
             state.users = state.users.filter(user => user.id !== action.payload)
         },
         updateUser(state, action) {
-            FormDialog()
             let User:User = action.payload
             let index = state.users.findIndex(user => user.id === action.payload.id)
             state.users[index] = User

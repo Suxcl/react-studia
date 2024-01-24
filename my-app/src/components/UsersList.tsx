@@ -6,13 +6,18 @@ function UsersList(props: {usersList: User[]}) {
 
     return (
         <>
-            {props.usersList.map((user: User) => {
-                return(
-                    <>
-                        <p><UserC user={user}/>   </p>
-                    </>
-                )
-            })}
+        <ul>
+            {
+                props.usersList.map((user: User) => (
+                    <li key={user.id}>
+                        <UserC user={user}/>
+                    </li>
+                ))
+            }
+                
+            
+        </ul>
+            
         </>
     )
 }

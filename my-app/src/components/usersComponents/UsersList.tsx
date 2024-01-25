@@ -1,4 +1,4 @@
-import { User } from "../types/user"
+import { User } from "../../types/user"
 import UserC from "./UserC"
 
 
@@ -14,8 +14,6 @@ function UsersList(props: {usersList: User[]}) {
                     </li>
                 ))
             }
-                
-            
         </ul>
             
         </>

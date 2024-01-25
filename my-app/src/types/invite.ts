@@ -1,7 +1,7 @@
 export type Invite = {
-    id: number
-    senderId: number
-    receiverId: number
+    id: string
+    senderId: string
+    receiverId: string
     status: InviteStatus
 }
 

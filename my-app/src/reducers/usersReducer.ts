@@ -1,13 +1,11 @@
 import type { User } from './../types/user';
-
-
-import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 
 interface UsersState {
     users: User[] 
     init_status: true|false,
-  }
+}
 
 const initialState: UsersState = {
     init_status: true,
@@ -37,6 +35,15 @@ export const userSlice = createSlice({
             let User:User = action.payload
             let index = state.users.findIndex(user => user.id === action.payload.id)
             state.users[index] = User
+        },
+        // {userId:string, friendId:string}
+        addFriend(state, action) {
+            let index = state.users.findIndex(user => user.id === action.payload.userId)
+            state.users[index].friends.push(action.payload.friendId)
+        },
+        removeFriend(state, action) {
+            let index = state.users.findIndex(user => user.id === action.payload.userId)
+            state.users[index].friends = state.users[index].friends.filter(friendId => friendId !== action.payload.friendId)   
         }
     },
 })

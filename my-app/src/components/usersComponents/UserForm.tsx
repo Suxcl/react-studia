@@ -1,19 +1,22 @@
 import React, { useEffect, useId, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { postUser, putUser } from "../api/user"
-import { addUser , updateUser} from '../reducers/usersReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { postUser, putUser } from "../../api/user"
+import { addUser , updateUser} from '../../reducers/usersReducer';
 import { useNavigate } from "react-router-dom";
-import type { User } from "../types/user";
+import type { User } from "../../types/user";
 import { v4 as uuidv4 } from 'uuid';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { login } from '../../reducers/authReducer';
+import { RootState } from '../../store';
+
 
 function UserForm(props: {userProp:User|null}){
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	// if user is null, we are creating a new user
+	// if user is not null, we are editing an existing user
 	const user:User|null = props.userProp   
-
+	const users = useSelector((state: RootState) => state.users).users
     console.log("user check", user?.id, user?.username )
     
 	const [error, setError] = useState("");
@@ -30,7 +33,6 @@ function UserForm(props: {userProp:User|null}){
     console.log("user check formdata", formData )
 
     useEffect(() => {
-        console.log("useEffect")
         if (user!=null) {
           setFormData({
             username: user.name,
@@ -39,7 +41,7 @@ function UserForm(props: {userProp:User|null}){
             name: user.name ,
             surname: user.surname,
             email: user.email,
-            phoneNumber: user.phoneNumber as unknown as string,
+            phoneNumber: String(user.phoneNumber),
             submitString: "Save"
           });
         }
@@ -64,14 +66,14 @@ function UserForm(props: {userProp:User|null}){
 			setError('Bad email')
 			return
 		}
-		if(!numberRegex.test(formData.phoneNumber)){
-			setError('Phone number must be a number')
-			return
-		}
-		if(formData.phoneNumber.length !== 9){
-			setError('Phone number must be 9 digits')
-			return
-		}
+		// if(!numberRegex.test(formData.phoneNumber)){
+		// 	setError('Phone number must be a number')
+		// 	return
+		// }
+		// if(formData.phoneNumber.length !== 9){
+		// 	setError('Phone number must be 9 digits')
+		// 	return
+		// }
         if(user != null){
             if(formData.password.length < 8){
                 setError('Password must be at least 8 characters')
@@ -85,6 +87,10 @@ function UserForm(props: {userProp:User|null}){
                 setError('Passwords do not match')
                 return
             }
+			if(users.find((user:User) => user.username === formData.username)){
+				setError('Username already exists')
+				return 
+			}
         }
 		
 		setError('');
@@ -99,15 +105,17 @@ function UserForm(props: {userProp:User|null}){
 			phoneNumber: parseInt(formData.phoneNumber),
 			friends: [],
 		}
-
+		
         if(user == null){
+			// posting new user
             postUser(userSend)
             dispatch(addUser(userSend))
             console.log('Registration successful!', formData);
-            console.log('Redirecting to Test Page');
-            toast("Succesful registration!");
-            navigate('/Test');
+            console.log('Redirecting to Blog Page');
+            navigate('/blog');
+			dispatch(login(userSend))
         }else{
+			// editing user
             putUser(userSend)
             dispatch(updateUser(userSend))
             console.log('Edition successful!', formData);
@@ -126,17 +134,17 @@ function UserForm(props: {userProp:User|null}){
 			</div>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor='username'/>
-				<input type='text' name='username' value={formData.username} onChange={handleChange} placeholder='username'/>
+				<input type='text' name='username' value={formData.username} onChange={handleChange} placeholder='username' required/>
 				<br></br>
                 {(() => {
                    if(user===null){
                     return (
                         <>
                             <label htmlFor='password'/>
-                            <input type='password' name='password' value={formData.password} onChange={handleChange} placeholder='password'/>
+                            <input type='password' name='password' value={formData.password} onChange={handleChange} placeholder='password' required/>
                             <br></br>
                             <label htmlFor='confirmPassword'/>
-                            <input type='password' name='confirmPassword' value={formData.confirmPassword} onChange={handleChange} placeholder='confirm password'/>
+                            <input type='password' name='confirmPassword' value={formData.confirmPassword} onChange={handleChange} placeholder='confirm password' required/>
                             <br></br>                        
                         </>
                     )
@@ -144,17 +152,17 @@ function UserForm(props: {userProp:User|null}){
                    return (<></>)
                 })()}
 				<label htmlFor='name'/>
-				<input type='text' name='name' value={formData.name} onChange={handleChange} placeholder='name'/>
+				<input type='text' name='name' value={formData.name} onChange={handleChange} placeholder='name' required/>
 				<br></br>
 				<label htmlFor='surname'/>
-				<input type='text' name='surname' value={formData.surname} onChange={handleChange} placeholder='surname'/>
+				<input type='text' name='surname' value={formData.surname} onChange={handleChange} placeholder='surname' required/>
 				<br></br>
 				<label htmlFor='email'/>
-				<input type='text' name='email' value={formData.email} onChange={handleChange} placeholder='email'/>
+				<input type='text' name='email' value={formData.email} onChange={handleChange} placeholder='email' required/>
 				<br></br>
 				<label htmlFor='phoneNumber'/>
-				<input type='text' name='phoneNumber' value={formData.phoneNumber} onChange={handleChange} placeholder='phone number'/>
-				<br></br>
+				{/* <input type='text' name='phoneNumber' value={formData.phoneNumber} onChange={handleChange} placeholder='phone number'/>
+				<br></br> */}
 				<button type='submit'>{formData.submitString}</button>
 			</form>
 		</>

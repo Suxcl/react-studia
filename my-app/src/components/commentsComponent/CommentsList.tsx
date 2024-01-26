@@ -4,7 +4,9 @@ import CommentC from "./CommentC"
 import CommentForm from "./CommentForm";
 
  function CommentsList(props: {comments:Comment[], post:Post}) {
-    const comments = props.comments
+    let comments = props.comments
+    if(comments === undefined) comments = []
+    
     const post = props.post
 
     return (

@@ -21,11 +21,12 @@ import type { Post } from "../types/post";
 import type { Invite } from "../types/invite";
 import { Comment } from "../types/comment";
 import { getComments } from "../api/comments";
+import PostForm from "../components/postsComponents/PostForm";
 
 function Test(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const loggedUser = useSelector((state: RootState) => state.auth)
 
     useEffect(() => {
         const fetchUsersAsync = async () => {
@@ -101,6 +102,12 @@ function Test(){
             <hr></hr>
 
             <h1>Posts</h1>
+            {loggedUser.user !== null ? (
+                    <PostForm/>    
+                ):(
+                <>
+                    <p>Log in to add new post</p>
+                </>)}
             {posts ? (
                 <PostList postsList={posts} postComments={postComments}/>
             ):(<><p>There are no posts</p></>)}

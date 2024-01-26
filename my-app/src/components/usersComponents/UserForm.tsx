@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { login } from '../../reducers/authReducer';
 import { RootState } from '../../store';
 
-
+import {Typography,TextField,Button,Container,Box,} from '@mui/material';
 function UserForm(props: {userProp:User|null}){
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -128,45 +128,34 @@ function UserForm(props: {userProp:User|null}){
     
 
 	return (
-		<>	
-			<div>
-				{error && <p>{error}</p>}
-			</div>
+		<>
+		 <Container maxWidth="xs" sx={{ marginTop:8 }}>
+			<Box>
+				{error && <Typography variant="body2" color="error" align="center" sx={{ marginBottom: 2 }}>{error}</Typography>}
+			</Box>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor='username'/>
-				<input type='text' name='username' value={formData.username} onChange={handleChange} placeholder='username' required/>
-				<br></br>
-                {(() => {
-                   if(user===null){
-                    return (
-                        <>
-                            <label htmlFor='password'/>
-                            <input type='password' name='password' value={formData.password} onChange={handleChange} placeholder='password' required/>
-                            <br></br>
-                            <label htmlFor='confirmPassword'/>
-                            <input type='password' name='confirmPassword' value={formData.confirmPassword} onChange={handleChange} placeholder='confirm password' required/>
-                            <br></br>                        
-                        </>
-                    )
-                   } 
-                   return (<></>)
-                })()}
-				<label htmlFor='name'/>
-				<input type='text' name='name' value={formData.name} onChange={handleChange} placeholder='name' required/>
-				<br></br>
-				<label htmlFor='surname'/>
-				<input type='text' name='surname' value={formData.surname} onChange={handleChange} placeholder='surname' required/>
-				<br></br>
-				<label htmlFor='email'/>
-				<input type='text' name='email' value={formData.email} onChange={handleChange} placeholder='email' required/>
-				<br></br>
-				<label htmlFor='phoneNumber'/>
-				{/* <input type='text' name='phoneNumber' value={formData.phoneNumber} onChange={handleChange} placeholder='phone number'/>
-				<br></br> */}
-				<button type='submit'>{formData.submitString}</button>
+				<TextField label="Username" variant="outlined" fullWidth margin="normal" id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required sx={{ marginBottom: 1, marginRight: 1 }} />
+		
+				{user === null && <>
+				<TextField label="Password" type="password" variant="outlined" fullWidth margin="normal" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required sx={{ marginBottom: 1, marginRight: 1 }} />
+				<TextField label="Confirm Password" type="password" variant="outlined" fullWidth margin="normal" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required sx={{ marginBottom: 1, marginRight: 1 }} />
+				</>}
+		
+				<TextField label="Name" variant="outlined" fullWidth margin="normal" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required sx={{ marginBottom: 1, marginRight: 1 }} />
+		
+				<TextField label="Surname" variant="outlined" fullWidth margin="normal" id="surname" name="surname" value={formData.surname} onChange={handleChange} placeholder="Surname" required sx={{ marginBottom: 1, marginRight: 1 }} />
+		
+				<TextField label="Email" variant="outlined" fullWidth margin="normal" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required sx={{ marginBottom: 1, marginRight: 1 }} />
+		
+				
+				{/* <TextField label="Phone Number" variant="outlined" fullWidth margin="normal" id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" sx={{ marginBottom: 1, marginRight: 1 }} /> */}
+				
+				<Button type="submit" variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>{formData.submitString}</Button>
 			</form>
+		  </Container>
 		</>
-	)
+	  );
+	
 
 }
 

@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/authReducer";
 
-
+import { Typography, TextField, Button, Container } from '@mui/material';
 
 function Login(){
     const navigate = useNavigate();
@@ -44,32 +44,52 @@ function Login(){
         
 
     return (
-        <>  
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                />
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit" onClick={handleSubmit}>Login</button>
-                {error && <p>{error}</p>}
-            </form>
-        </>
-    )
-}
+        <Container maxWidth="xs" sx={{ marginTop: 8 }}>
+          <Typography variant="h4" component="div" align="center" gutterBottom>
+            Login
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Username"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              label="Password"
+              type="password"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ marginTop: 2 }}
+            >
+              Login
+            </Button>
+            {error && (
+              <Typography variant="body2" color="error" align="center" sx={{ marginTop: 2 }}>
+                {error}
+              </Typography>
+            )}
+          </form>
+        </Container>
+      )
+    }
+
 
 export default Login

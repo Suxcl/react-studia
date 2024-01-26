@@ -21,7 +21,9 @@ export const postInvite = async(invite:Invite) => {
     await axios.post(`${URL}`, {
         id: invite.id,
         senderId: invite.senderId,
+        senderUsername: invite.senderUsername,
         receiverId: invite.receiverId,
+        receiverUsername: invite.receiverUsername,
         status: invite.status
     }).then(response => {
         console.log("post invite successfully")
@@ -36,7 +38,9 @@ export const putInvite = async(invite:Invite) => {
     await axios.patch(`${URL}/${invite.id}`, {
         id: invite.id,
         senderId: invite.senderId,
+        senderUsername: invite.senderUsername,
         receiverId: invite.receiverId,
+        receiverUsername: invite.receiverUsername,
         status: invite.status
     }).then(response => {
         console.log("patch invite successfully")

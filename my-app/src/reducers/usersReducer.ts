@@ -36,18 +36,22 @@ export const userSlice = createSlice({
             let index = state.users.findIndex(user => user.id === action.payload.id)
             state.users[index] = User
         },
-        // {userId:string, friendId:string}
+        // {user1Id:string, user2Id:string}
         addFriend(state, action) {
-            let index = state.users.findIndex(user => user.id === action.payload.userId)
-            state.users[index].friends.push(action.payload.friendId)
+            let index = state.users.findIndex(user => user.id === action.payload.user1Id)
+            let friendIndex = state.users.findIndex(user => user.id === action.payload.user2Id)
+            state.users[index].friends.push(action.payload.user2Id)
+            state.users[friendIndex].friends.push(action.payload.user1Id)
         },
         removeFriend(state, action) {
-            let index = state.users.findIndex(user => user.id === action.payload.userId)
-            state.users[index].friends = state.users[index].friends.filter(friendId => friendId !== action.payload.friendId)   
+            let index = state.users.findIndex(user => user.id === action.payload.user1Id)
+            let friendIndex = state.users.findIndex(user => user.id === action.payload.user2Id)
+            state.users[index].friends = state.users[index].friends.filter(friendId => friendId !== action.payload.user2Id)   
+            state.users[friendIndex].friends = state.users[friendIndex].friends.filter(friendId => friendId !== action.payload.user1Id)
         }
     },
 })
 
-export const { addUser, removeUser, updateUser, setUsers} = userSlice.actions
+export const { addUser, removeUser, updateUser, setUsers, addFriend, removeFriend} = userSlice.actions
 export default userSlice.reducer
 

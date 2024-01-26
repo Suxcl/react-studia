@@ -35,7 +35,12 @@ export const postSlice = createSlice({
         addPost(state, action) {
             console.log("adding new post to redux")     
             console.log(action.payload)
-            state.posts.push(action.payload)
+            if(state.posts === undefined) {
+                state.posts = [action.payload]
+            }else{
+                state.posts.push(action.payload)
+            }
+            
         },
         removePost(state, action) {
             state.posts = state.posts.filter(post => post.id !== action.payload)
@@ -49,7 +54,11 @@ export const postSlice = createSlice({
         // {postId:string, comment:Comment}
         addComment(state, action) {
             let index = state.posts.findIndex(post => String(post.id) === String(action.payload.postId))
-            state.comments[index].push(action.payload.comment)
+            if(state.comments[index] === undefined) {
+                state.comments[index] = [action.payload.comment]
+            }else{
+                state.comments[index].push(action.payload.comment)
+            }
         },
         updateComment(state, action) {
             let index = state.posts.findIndex(post => String(post.id) === String(action.payload.postId))

@@ -6,6 +6,7 @@ import { postComment } from "../../api/comments";
 import { addComment } from "../../reducers/postsReducer";
 import { Comment } from "../../types/comment";
 import { Post } from "../../types/post";
+import { Paper, Typography, TextField, Button } from "@mui/material";
 
 function CommentForm(props: {post:Post}) {
     const post = props.post
@@ -42,31 +43,27 @@ function CommentForm(props: {post:Post}) {
     }
     
     return (
-        <>
-            {loggedUser.someoneIsLogged ? (
-                <>  
-                    <p>Add new comment</p>
-                    <form onSubmit={handleSubmit}>
-    
-                        <label>
-                            Body:
-                            <input
-                                required
-                                type="text"
-                                name="body"
-                                value={formData.body}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <button type="submit">Add Comment</button>
-                    </form>
-                </>           
-            ):(
-                <><p>You must be logged in to comment</p></>           
-            )}
-        </>
-
-    )
+        <Paper elevation={3} style={{ padding: '1rem' }}>
+          <Typography variant="h6" gutterBottom>Add new comment</Typography>
+          {loggedUser.someoneIsLogged ? (
+            <form onSubmit={handleSubmit}>
+              <TextField
+                label="Body"
+                fullWidth
+                required
+                name="body"
+                value={formData.body}
+                onChange={handleChange}
+                variant="outlined"
+                margin="normal"
+              />
+              <Button type="submit" variant="contained" color="primary">Add Comment</Button>
+            </form>
+          ) : (
+            <Typography variant="body1">You must be logged in to comment</Typography>
+          )}
+        </Paper>
+      )
 }
 
 export default CommentForm

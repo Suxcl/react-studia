@@ -6,6 +6,7 @@ import { addPost } from "../../reducers/postsReducer";
 import { RootState } from "../../store";
 import { Post } from "../../types/post";
 import { v4 as uuidv4 } from 'uuid';
+import { Paper, Typography, Grid, TextField, Button } from "@mui/material";
 function PostForm(){
 
     const loggedUser = useSelector((state: RootState) => state.auth)
@@ -52,16 +53,34 @@ function PostForm(){
 
     return (
         <>
-            <p>Create new Post</p>
+          <Paper elevation={3} style={{ padding: '1rem' }}>
+            <Typography variant="h6" gutterBottom>Create new Post</Typography>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Title</label>
-                <input required placeholder="title" name="title" value={formData.title} onChange={handleChange} type="text" />
-                <label htmlFor="body">Body</label>
-                <input required placeholder="body" name="body" value={formData.body} onChange={handleChange} type="text" />
-                <button type="submit">Submit</button>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Title" fullWidth required name="title" value={formData.title} 
+                    onChange={handleChange} variant="outlined" margin="normal"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Body" fullWidth required multiline rows={4} name="body"
+                    value={formData.body} onChange={handleChange} variant="outlined" margin="normal"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  {loggedUser.user !== null ? (
+                    <Button type="submit" variant="contained" color="primary">Submit</Button>
+                  ) : (
+                    <Typography variant="body1">Log in to add new post</Typography>
+                  )}
+                </Grid>
+              </Grid>
             </form>
+          </Paper>
         </>
-    )
+      );
 }
 
 export default PostForm

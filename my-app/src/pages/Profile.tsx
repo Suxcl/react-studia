@@ -15,6 +15,7 @@ import { addInvite } from "../reducers/invitesReducer";
 import { postInvite } from "../api/invite";
 import PostForm from "../components/postsComponents/PostForm";
 import InviteList from "../components/invitesComponents/InviteList";
+import { Grid, Typography, Box, Button, Container } from "@mui/material";
 
 interface Params {
     id: string;
@@ -83,7 +84,71 @@ function Profile(){
     }
 
     return (
-        <div>
+        <>
+            <Grid container style={{marginTop:"80px", padding: "20px"}}>
+                <div>
+                <Typography variant="h5">Profile - {userProfile.username}</Typography>
+                <Typography>{userProfile.name} {userProfile.surname}</Typography>
+                <Typography>{userProfile.email}</Typography>
+                <br></br>
+                <Box>
+                    {loggedUser.user?.id === id ? (
+                    <> 
+                        <Button style={{marginRight: "10px"}} variant="contained" onClick={EditData}>Edit User Data</Button>
+                        <Button variant="contained" onClick={RemoveAccount}>Delete Account</Button>
+                    </>
+                    ) : (
+                    <>
+                        {loggedUser.user?.friends.includes(id as string) ? (
+                        <Button variant="contained" onClick={removeFriend}>Remove Friend</Button>
+                        ) : (
+                        <Button variant="contained" onClick={sentFriendRequest}>Add Friend</Button>
+                        )}
+                    </>
+                    )}
+                </Box>
+                </div>
+            </Grid>
+            <Container maxWidth="xl" style={{ marginTop: "80px"}}>
+				<Grid container spacing={2}>
+					<Grid item xs={3} style={{minWidth: "200px",padding: "10px",margin: "10px", border: "1px solid black"}}>
+                        <Grid container alignItems="center" spacing={1}>
+                            <Grid xs={6}>
+                                <h2 style={{textAlign: "center"}}> FriendsList </h2>
+                            </Grid>
+                        </Grid>
+						{userFriends ? (
+                            <>
+                                <UsersList usersList={userFriends}/>    
+                            </>
+						):(
+							<><p>There are no users</p></>
+						)}
+
+					</Grid>
+					<Grid item xs={6} style={{minWidth: "500px",padding: "10px", margin: "10px", border: "1px solid black"}}>
+						<h1 style={{textAlign: "center"}}>User Posts</h1>
+                        <Grid container alignItems="center" spacing={1}>
+                            {loggedUser.user !== null ? (
+                                <PostForm/>        
+							):(
+								<p>Log in to add new post</p>
+							)}
+                        </Grid>
+                        <Grid>
+						{userPosts ? (
+							<PostList postsList={userPosts} postComments={userPostsCommments}/>
+						):(<><p>There are no posts</p></>)}
+                        </Grid>
+					</Grid>
+                    
+					<Grid item xs={2}  style={{minWidth: "200px",padding: "10px",margin: "10px", border: "1px solid black"}}>
+                        <h2 style={{textAlign: "center"}}>Invites</h2>
+						<p>यह एक लंबा स्थापित तथ्य है कि जब एक पाठक एक पृष्ठ के खाखे को देखेगा तो पठनीय सामग्री से विचलित हो जाएगा. Lorem Ipsum का उपयोग करने का मुद्दा यह है कि इसमें एक और अधिक या कम अक्षरों का सामान्य वितरण किया गया है, 'Content here, content here' प्रयोग करने की जगह इसे पठनीय English के रूप में प्रयोग किया जाये. अब कई डेस्कटॉप प्रकाशन संकुल और वेब पेज संपादक उनके डिफ़ॉल्ट मॉडल पाठ के रूप में Lorem Ipsum उपयोग करते हैं, और अब "Lorem Ipsum" के लिए खोज अपने शैशव में कई वेब साइटों को उजागर करती है. इसके विभिन्न संस्करणों का वर्षों में विकास हुआ है, कभी दुर्घटना से, तो कभी प्रयोजन पर (हास्य और लगाव डालने के लिए).</p>
+					</Grid>
+				</Grid>
+			</Container>
+            
             <div>
                 <h1>Profile - change data or smt</h1>
                 {userProfile.username}|{userProfile.name}|{userProfile.surname}
@@ -105,9 +170,6 @@ function Profile(){
                     )}
                 </>
                 )}
-   
-                {/* else */}
-                    {/* dodaj znajomego */}
             </div>
             <div>
                 <h1>friends request etc</h1>
@@ -130,7 +192,7 @@ function Profile(){
                 ):(<></>)}
                 <PostList postsList={userPosts} postComments={userPostsCommments}/>
             </div>
-        </div>
+        </>
     )
 }
 

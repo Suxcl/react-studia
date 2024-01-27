@@ -4,21 +4,22 @@ import { Post } from "../../types/post"
 import PostC from "./PostC"
 import PostForm from "./PostForm"
 import { Comment } from "../../types/comment"
+import { List, ListItem } from "@mui/material"
 
 function PostsList(props: {postsList: Post[], postComments: Comment[][]}) {
     const loggedUser = useSelector((state: RootState) => state.auth)
     return (
         <>
-        <ul>
+        <List>
             {   
 
                 props.postsList.map((post: Post, index: number) => (
-                    <li key={post.id}>
+                    <ListItem key={post.id} >
                         <PostC post={post} comments={props.postComments[index]}/>
-                    </li>
+                    </ListItem>
                 ))
             }
-        </ul>
+        </List>
             
         </>
     )

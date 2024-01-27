@@ -4,6 +4,7 @@ import { RootState } from "../../store"
 import { useState } from "react"
 import { updateComment, removeComment } from "../../reducers/postsReducer";
 import { putComment } from "../../api/comments";
+import { TextField, Button, Typography } from "@mui/material";
 
 function CommentC(props: {comment:Comment, postId: string}){
 
@@ -47,40 +48,37 @@ function CommentC(props: {comment:Comment, postId: string}){
         removeComment(comment)
     }
     return (
-        <> 
-        {editComment ? (
-           <>
+        <>
+          {editComment ? (
             <form onSubmit={handleSubmit}>
-                <label>
-                    Body:
-                    <input
-                        required
-                        type="text"
-                        name="body"
-                        value={formData.body}
-                        onChange={handleChange}
-                    />
-                </label>
-                <button type="submit">Save</button>
-                <button onClick={() => setEditComment(!editComment)}>Cancel</button>
+              <TextField
+                required
+                fullWidth
+                label="Body"
+                name="body"
+                value={formData.body}
+                onChange={handleChange}
+                variant="outlined"
+                margin="normal"
+              />
+              <Button type="submit" variant="contained" color="primary">Save</Button>
+              <Button onClick={() => setEditComment(!editComment)}>Cancel</Button>
             </form>
-           </> 
-        ):(
+          ) : (
             <>
-                <p>Author id:{comment.authorUsername}</p>
-                <p>Content: {comment.body}</p>
+              <Typography variant="body1">Author: {comment.authorUsername}</Typography>
+              <Typography variant="body1">Content: {comment.body}</Typography>
             </>
-        )}
-        
-
-        {(comment.authorId === loggedUser.user?.id && editComment === false) ? (
+          )}
+    
+          {comment.authorId === loggedUser.user?.id && !editComment && (
             <>
-                <button onClick={() => setEditComment(!editComment)}>Edit</button>
-                <button onClick={deleteComment}>Delete</button>
-            </>   
-        ):(<></>)}
+              <Button onClick={() => setEditComment(!editComment)}>Edit</Button>
+              <Button onClick={deleteComment}>Delete</Button>
+            </>
+          )}
         </>
-    )
+      );
 }
 
 export default CommentC

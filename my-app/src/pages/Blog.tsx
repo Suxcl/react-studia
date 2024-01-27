@@ -22,7 +22,8 @@ import type { Invite } from "../types/invite";
 import { Comment } from "../types/comment";
 import { getComments } from "../api/comments";
 import PostForm from "../components/postsComponents/PostForm";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
+import PeopleIcon from '@mui/icons-material/People';
 
 function Blog(){
     const dispatch = useDispatch();
@@ -91,29 +92,43 @@ function Blog(){
 				
 				<Grid container spacing={2}>
 					<Grid item xs={3} style={{minWidth: "200px",padding: "10px",margin: "10px", border: "1px solid black"}}>
-						<h2> UsersList </h2>
+                        <Grid container alignItems="center" spacing={1}>
+                            <Grid xs={6}>
+                            
+                                <h2 style={{textAlign: "center"}}> UsersList </h2>
+                            </Grid>
+                        </Grid>
+						
 						
 						{users ? (
-							<UsersList usersList={users}/>    
+                            <>
+							
+                            <UsersList usersList={users}/>    
+                            </>
 						):(
 							<><p>There are no users</p></>
 						)}
 
 					</Grid>
 					<Grid item xs={6} style={{minWidth: "500px",padding: "10px", margin: "10px", border: "1px solid black"}}>
-						<h1>Posts</h1>
-						{loggedUser.user !== null ? (
-								<PostForm/>    
+						<h1 style={{textAlign: "center"}}>Posts</h1>
+                        <Grid container alignItems="center" spacing={1}>
+                            {loggedUser.user !== null ? (
+                                <PostForm/>        
 							):(
-							<>
 								<p>Log in to add new post</p>
-							</>)}
+							)}
+                        </Grid>
+                        <Grid>
 						{posts ? (
 							<PostList postsList={posts} postComments={postComments}/>
 						):(<><p>There are no posts</p></>)}
+                        </Grid>
 					</Grid>
+                    
 					<Grid item xs={2}  style={{minWidth: "200px",padding: "10px",margin: "10px", border: "1px solid black"}}>
-							<p>यह एक लंबा स्थापित तथ्य है कि जब एक पाठक एक पृष्ठ के खाखे को देखेगा तो पठनीय सामग्री से विचलित हो जाएगा. Lorem Ipsum का उपयोग करने का मुद्दा यह है कि इसमें एक और अधिक या कम अक्षरों का सामान्य वितरण किया गया है, 'Content here, content here' प्रयोग करने की जगह इसे पठनीय English के रूप में प्रयोग किया जाये. अब कई डेस्कटॉप प्रकाशन संकुल और वेब पेज संपादक उनके डिफ़ॉल्ट मॉडल पाठ के रूप में Lorem Ipsum उपयोग करते हैं, और अब "Lorem Ipsum" के लिए खोज अपने शैशव में कई वेब साइटों को उजागर करती है. इसके विभिन्न संस्करणों का वर्षों में विकास हुआ है, कभी दुर्घटना से, तो कभी प्रयोजन पर (हास्य और लगाव डालने के लिए).</p>
+                        <h2 style={{textAlign: "center"}}>Info of the day</h2>
+						<p>यह एक लंबा स्थापित तथ्य है कि जब एक पाठक एक पृष्ठ के खाखे को देखेगा तो पठनीय सामग्री से विचलित हो जाएगा. Lorem Ipsum का उपयोग करने का मुद्दा यह है कि इसमें एक और अधिक या कम अक्षरों का सामान्य वितरण किया गया है, 'Content here, content here' प्रयोग करने की जगह इसे पठनीय English के रूप में प्रयोग किया जाये. अब कई डेस्कटॉप प्रकाशन संकुल और वेब पेज संपादक उनके डिफ़ॉल्ट मॉडल पाठ के रूप में Lorem Ipsum उपयोग करते हैं, और अब "Lorem Ipsum" के लिए खोज अपने शैशव में कई वेब साइटों को उजागर करती है. इसके विभिन्न संस्करणों का वर्षों में विकास हुआ है, कभी दुर्घटना से, तो कभी प्रयोजन पर (हास्य और लगाव डालने के लिए).</p>
 					</Grid>
 				</Grid>
 			</Container>

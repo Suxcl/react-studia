@@ -139,8 +139,10 @@ function PostC(props:{post:Post, comments:Comment[]}){
               <Paper elevation={3} style={{ padding: '1rem' }}>
                 <Typography variant="h6" gutterBottom>Edit Post</Typography>
                 <form onSubmit={handleSubmit}>
-                  <TextField name="title" label="Title" fullWidth margin="normal" value={formData.title} onChange={handleChange} />
-                  <TextField name="body" label="Body" fullWidth multiline rows={4} required margin="normal" value={formData.body} onChange={handleChange} />
+                  <TextField name="title" label="Title" fullWidth margin="normal" 
+                  value={formData.title} onChange={handleChange} />
+                  <TextField name="body" label="Body" fullWidth multiline rows={4} 
+                  required margin="normal" value={formData.body} onChange={handleChange} />
                   <Button type="submit" variant="contained" color="primary">Submit</Button>
                   <Button onClick={EditPost}>Cancel</Button>
                 </form>
@@ -155,7 +157,8 @@ function PostC(props:{post:Post, comments:Comment[]}){
                     <IconButton onClick={() => RemovePost(post.id)}><DeleteIcon /></IconButton>
                   </div>
                 )}
-                <Typography variant="body2" gutterBottom>Date: {post.createdAt} | Updated At: {post.updatedAt} | Author: {post.authorUsername}</Typography>
+                <Typography variant="body2" gutterBottom>Date: {post.createdAt} 
+                | Updated At: {post.updatedAt} | Author: {post.authorUsername}</Typography>
                 <Typography variant="body2">Likes: {post.likes} | Dislikes: {post.dislikes}</Typography>
                 <Button onClick={likeClicked}>Like</Button>
                 <Button onClick={dislikeClicked}>Dislike</Button>

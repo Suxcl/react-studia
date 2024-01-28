@@ -24,12 +24,6 @@ const Layout = () => {
               Home
             </Button>
           </Link>
-          {/* <Link to="/test">
-            <Button color="inherit" variant="contained" sx={{ mr: 2 }}>
-              Test
-            </Button>
-          </Link> */}
-          
           {loggedUser.someoneIsLogged ?  
                (
                 <>         

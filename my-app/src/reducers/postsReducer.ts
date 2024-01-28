@@ -16,8 +16,6 @@ const initialState: PostsState = {
     comments: []
 };
 
-
-
 export const postSlice = createSlice({
     name: 'posts',
     initialState,

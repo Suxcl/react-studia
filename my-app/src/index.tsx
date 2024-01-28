@@ -32,6 +32,7 @@ root.render(
           <Route path='UserEdit' element={<UserEdit/>}/>
           <Route path='Profile/:id' element={<Profile/>}></Route>
           <Route path="*" element={<Blog />} />
+        <Route path="*" element={<Blog />} />
         </Route>
       </Routes>  
     </Provider>

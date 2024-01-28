@@ -16,6 +16,7 @@ import { postInvite } from "../api/invite";
 import PostForm from "../components/postsComponents/PostForm";
 import InviteList from "../components/invitesComponents/InviteList";
 import { Grid, Typography, Box, Button, Container } from "@mui/material";
+import { Margin } from "@mui/icons-material";
 
 interface Params {
     id: string;
@@ -132,7 +133,9 @@ function Profile(){
                             {loggedUser.user !== null ? (
                                 <PostForm/>        
 							):(
-								<p>Log in to add new post</p>
+                                <Typography variant="h6" textAlign="center" color="textSecondary" style={{margin: "auto"}}>
+                                Log in to add new post
+                                </Typography>
 							)}
                         </Grid>
                         <Grid>
@@ -143,55 +146,16 @@ function Profile(){
 					</Grid>
                     
 					<Grid item xs={2}  style={{minWidth: "200px",padding: "10px",margin: "10px", border: "1px solid black"}}>
-                        <h2 style={{textAlign: "center"}}>Invites</h2>
-						<p>यह एक लंबा स्थापित तथ्य है कि जब एक पाठक एक पृष्ठ के खाखे को देखेगा तो पठनीय सामग्री से विचलित हो जाएगा. Lorem Ipsum का उपयोग करने का मुद्दा यह है कि इसमें एक और अधिक या कम अक्षरों का सामान्य वितरण किया गया है, 'Content here, content here' प्रयोग करने की जगह इसे पठनीय English के रूप में प्रयोग किया जाये. अब कई डेस्कटॉप प्रकाशन संकुल और वेब पेज संपादक उनके डिफ़ॉल्ट मॉडल पाठ के रूप में Lorem Ipsum उपयोग करते हैं, और अब "Lorem Ipsum" के लिए खोज अपने शैशव में कई वेब साइटों को उजागर करती है. इसके विभिन्न संस्करणों का वर्षों में विकास हुआ है, कभी दुर्घटना से, तो कभी प्रयोजन पर (हास्य और लगाव डालने के लिए).</p>
+                        <h2 style={{textAlign: "center"}}>Invites</h2>            
+                        {loggedUser.user?.id === id ? (
+                            <>
+                                <InviteList invites={userInvites} />
+                            </>
+                        ):(<></>)}
 					</Grid>
 				</Grid>
 			</Container>
             
-            <div>
-                <h1>Profile - change data or smt</h1>
-                {userProfile.username}|{userProfile.name}|{userProfile.surname}
-                {loggedUser.user?.id === id ? (
-                <> 
-                    <button onClick={() =>EditData()}>Edit User Data</button>
-                    <button onClick={() =>RemoveAccount()}>Delete Accoutn</button>
-                </>
-                ):(
-                <>
-                    {loggedUser.user?.friends.includes(id as string) ? (
-                        <>
-                            <button onClick={removeFriend}>remove friend</button>
-                        </>
-                    ):(
-                        <>
-                            <button onClick={sentFriendRequest}>add friend</button>
-                        </>
-                    )}
-                </>
-                )}
-            </div>
-            <div>
-                <h1>friends request etc</h1>
-                {loggedUser.user?.id === id ? (
-                    <>
-                        <InviteList invites={userInvites} />
-                    </>
-                ):(<></>)}
-            </div>
-            <div>
-                <h1>Friends</h1>
-                <UsersList usersList={userFriends}/>
-            </div>
-            <div>
-                <h1>Posts</h1>
-                {loggedUser.user?.id === id ? (
-                    <>
-                        <PostForm />
-                    </>
-                ):(<></>)}
-                <PostList postsList={userPosts} postComments={userPostsCommments}/>
-            </div>
         </>
     )
 }

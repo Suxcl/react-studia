@@ -7,7 +7,6 @@ import { Comment } from "../../types/comment"
 import { List, ListItem } from "@mui/material"
 
 function PostsList(props: {postsList: Post[], postComments: Comment[][]}) {
-    const loggedUser = useSelector((state: RootState) => state.auth)
     return (
         <>
         <List>

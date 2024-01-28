@@ -80,8 +80,8 @@ function Blog(){
     },[dispatch])
 
     let users = useSelector((state: RootState) => state.users).users
-    let posts = useSelector((state: RootState) => state.posts).posts
-    let postComments = useSelector((state: RootState) => state.posts).comments
+    let posts = useSelector((state: RootState) => state.posts).reversePosts
+    let postComments = useSelector((state: RootState) => state.posts).reverseComments
     
 
 
@@ -116,7 +116,10 @@ function Blog(){
                             {loggedUser.user !== null ? (
                                 <PostForm/>        
 							):(
-								<p>Log in to add new post</p>
+                                <Typography variant="h6" textAlign="center" color="textSecondary" style={{margin: "auto"}}>
+                                Log in to add new post
+                                </Typography>
+								
 							)}
                         </Grid>
                         <Grid>

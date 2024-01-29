@@ -1,16 +1,13 @@
-import { Comment } from "../types/comment";
 export type Post = {
-    id: number
-    authorId: number
+    id: string
+    authorId: string
     authorUsername: string
     title: string
     body: string
     likes: number
-    userIdLikes: number[]
+    userIdLikes: string[]
     dislikes: number
-    userIdDislikes: number[]
-    comments: Comment[]
-    commentsCount: number
+    userIdDislikes: string[]
     createdAt: string
     updatedAt: string
 

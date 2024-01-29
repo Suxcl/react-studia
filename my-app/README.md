@@ -8,9 +8,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 npm install axios
 npm install @reduxjs/toolkit react-redux
 npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
 npm install react-router-dom
 npm install --save react-toastify
 npm install uuid
+npm install bootstrap
 
 # docs for dialogs
 https://mui.com/material-ui/react-dialog/

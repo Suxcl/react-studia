@@ -6,6 +6,6 @@ export type User = {
     username: string
     password: string
     phoneNumber: number
-    friends: number[]
+    friends: string[]
 }
 

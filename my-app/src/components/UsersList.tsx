@@ -14,8 +14,6 @@ function UsersList(props: {usersList: User[]}) {
                     </li>
                 ))
             }
-                
-            
         </ul>
             
         </>

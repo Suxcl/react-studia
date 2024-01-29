@@ -11,8 +11,6 @@ function UserC(props:{user: User}){
 
     function EditUser(user:User){
         navigate(`/UserEdit`, {state: {user}})
-        // dispatch(updateUser(user.id))
-        // putUser(user)
     }
 
     function RemoveUser(id: string){

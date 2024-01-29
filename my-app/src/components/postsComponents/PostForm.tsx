@@ -6,7 +6,8 @@ import { addPost } from "../../reducers/postsReducer";
 import { RootState } from "../../store";
 import { Post } from "../../types/post";
 import { v4 as uuidv4 } from 'uuid';
-import { Paper, Typography, Grid, TextField, Button } from "@mui/material";
+import { Paper, Typography, Grid, TextField, Button, InputLabel } from "@mui/material";
+import { Label } from "@mui/icons-material";
 function PostForm(){
 
     const loggedUser = useSelector((state: RootState) => state.auth)
@@ -64,14 +65,16 @@ function PostForm(){
                   />
                 </Grid>
                 <Grid item xs={12}>
+                
                   <TextField
-                    label="Body" fullWidth required multiline rows={4} name="body"
-                    value={formData.body} onChange={handleChange} variant="outlined" margin="normal"
+                    label="Body" fullWidth required name="body" value={formData.body} 
+                    onChange={handleChange} variant="outlined" margin="normal"
                   />
+
                 </Grid>
                 <Grid item xs={12}>
                   {loggedUser.user !== null ? (
-                    <Button type="submit" variant="contained" color="primary">Submit</Button>
+                    <Button type="submit" variant="contained" color="primary" value = "Submit">Submit</Button>
                   ) : (
                     <Typography variant="body1">Log in to add new post</Typography>
                   )}

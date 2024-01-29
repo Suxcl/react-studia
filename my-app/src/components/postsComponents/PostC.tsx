@@ -141,10 +141,12 @@ function PostC(props:{post:Post, comments:Comment[]}){
                 <form onSubmit={handleSubmit}>
                   <TextField name="title" label="Title" fullWidth margin="normal" 
                   value={formData.title} onChange={handleChange} />
-                  <TextField name="body" label="Body" fullWidth multiline rows={4} 
-                  required margin="normal" value={formData.body} onChange={handleChange} />
-                  <Button type="submit" variant="contained" color="primary">Submit</Button>
-                  <Button onClick={EditPost}>Cancel</Button>
+                    <TextField
+                    label="Body" fullWidth required name="body" value={formData.body} 
+                    onChange={handleChange} variant="outlined" margin="normal"
+                  />
+                  <Button type="submit" variant="contained" color="primary" value="submit">Submit</Button>
+                  <Button onClick={EditPost} value="cancel">Cancel</Button>
                 </form>
               </Paper>
             ) : (
@@ -153,15 +155,15 @@ function PostC(props:{post:Post, comments:Comment[]}){
                 <Typography variant="body1" gutterBottom>{post.body}</Typography>
                 {!editPost && loggedUser.user?.id === post.authorId && (
                   <div>
-                    <IconButton onClick={EditPost}><EditIcon /></IconButton>
-                    <IconButton onClick={() => RemovePost(post.id)}><DeleteIcon /></IconButton>
+                    <IconButton value="Edit" onClick={EditPost}><EditIcon />Edit</IconButton>
+                    <IconButton value="Delete" onClick={() => RemovePost(post.id)}><DeleteIcon />Remove</IconButton>
                   </div>
                 )}
                 <Typography variant="body2" gutterBottom>Date: {post.createdAt} 
                 | Updated At: {post.updatedAt} | Author: {post.authorUsername}</Typography>
                 <Typography variant="body2">Likes: {post.likes} | Dislikes: {post.dislikes}</Typography>
-                <Button onClick={likeClicked}>Like</Button>
-                <Button onClick={dislikeClicked}>Dislike</Button>
+                <Button onClick={likeClicked} value="Like">Like</Button>
+                <Button onClick={dislikeClicked} value="Dislike">Dislike</Button>
               </Paper>
             )}
           </Grid>

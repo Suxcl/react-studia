@@ -31,10 +31,12 @@ const Layout = () => {
                     <Button color="inherit" variant="contained" sx={{ mr: 2 }}>
                       Profile
                     </Button>
-                  </Link>       
+                  </Link>
+                  <Link to="/Blog">       
                   <Button onClick={() => dispatch(logout())} color="inherit" variant="contained" sx={{ mr: 2 }}>
                     Logout
                   </Button>
+                  </Link>
                 </>
               ) : (
                 <>

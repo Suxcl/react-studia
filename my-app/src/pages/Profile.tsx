@@ -29,6 +29,9 @@ function Profile(){
     const dispatch = useDispatch();
     const loggedUser = useSelector((state: RootState) => state.auth)
 
+    document.title = "Profile";
+
+
     
     // data required for profile
     let userPosts:Post[] = []

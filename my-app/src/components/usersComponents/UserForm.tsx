@@ -66,15 +66,15 @@ function UserForm(props: {userProp:User|null}){
 			setError('Bad email')
 			return
 		}
-		// if(!numberRegex.test(formData.phoneNumber)){
-		// 	setError('Phone number must be a number')
-		// 	return
-		// }
-		// if(formData.phoneNumber.length !== 9){
-		// 	setError('Phone number must be 9 digits')
-		// 	return
-		// }
-        if(user != null){
+		if(!numberRegex.test(formData.phoneNumber)){
+			setError('Phone number must be a number')
+			return
+		}
+		if(formData.phoneNumber.length !== 9){
+			setError('Phone number must be 9 digits')
+			return
+		}
+        if(user == null){
             if(formData.password.length < 8){
                 setError('Password must be at least 8 characters')
                 return
@@ -130,9 +130,7 @@ function UserForm(props: {userProp:User|null}){
 	return (
 		<>
 		 <Container maxWidth="xs" sx={{ marginTop:8 }}>
-			<Box>
-				{error && <Typography variant="body2" color="error" align="center" sx={{ marginBottom: 2 }}>{error}</Typography>}
-			</Box>
+			
 			<form onSubmit={handleSubmit}>
 				<TextField label="Username" variant="outlined" fullWidth margin="normal" id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required sx={{ marginBottom: 1, marginRight: 1 }} />
 		
@@ -148,8 +146,10 @@ function UserForm(props: {userProp:User|null}){
 				<TextField label="Email" variant="outlined" fullWidth margin="normal" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required sx={{ marginBottom: 1, marginRight: 1 }} />
 		
 				
-				{/* <TextField label="Phone Number" variant="outlined" fullWidth margin="normal" id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" sx={{ marginBottom: 1, marginRight: 1 }} /> */}
-				
+				<TextField label="Phone Number" variant="outlined" fullWidth margin="normal" id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" sx={{ marginBottom: 1, marginRight: 1 }} />
+				<Box>
+					{error && <Typography variant="body2" color="error" align="center" sx={{ marginBottom: 2 ,marginTop: 2}}>{error}</Typography>}
+				</Box>
 				<Button type="submit" variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>{formData.submitString}</Button>
 			</form>
 		  </Container>

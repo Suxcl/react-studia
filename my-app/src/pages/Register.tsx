@@ -11,6 +11,9 @@ import UserForm from '../components/usersComponents/UserForm';
 
 function Register(){
 
+	document.title = "Register Page";
+
+
 	return (
 		<>	
 			<div>

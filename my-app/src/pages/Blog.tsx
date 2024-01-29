@@ -25,10 +25,14 @@ import PostForm from "../components/postsComponents/PostForm";
 import { Container, Grid, Typography } from "@mui/material";
 import PeopleIcon from '@mui/icons-material/People';
 
+
+
 function Blog(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loggedUser = useSelector((state: RootState) => state.auth)
+    document.title = "Blog";
+
 
     useEffect(() => {
         const fetchUsersAsync = async () => {

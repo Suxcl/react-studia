@@ -10,6 +10,9 @@ function Login(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    document.title = "Login Page";
+
+
 
     let users = useSelector((state: RootState) => state.users).users
     const [error, setError] = useState("");
